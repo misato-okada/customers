@@ -3,8 +3,8 @@ require_once __DIR__ . '/functions.php';
 
 $dbh = connectDb();
 
-$customers = findCustomers();
 
+$customers = findCustomers();
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -39,7 +39,7 @@ $customers = findCustomers();
                 </tbody>
             </table>
 
-            <a href="" class="btn new-btn">新規登録</a>
+            <a href="new.php" class="btn new-btn">新規登録</a>
 
         </div>
     </div>
