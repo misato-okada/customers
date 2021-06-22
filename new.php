@@ -35,13 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form action="" method="post">
                 <label for="company">会社名</label>
                 <input type="text" id="company" name="company" 
-                value="<?php if( !empty($company))echo $company; ?>">
+                value="<?php if (!empty($company)) echo $company; ?>">
                 <label for="name">氏名</label>
                 <input type="text" id="name" name="name" 
-                value="<?php if( !empty($name))echo $name; ?>">
+                value="<?php if (!empty($name)) echo $name; ?>">
                 <label for="email">メールアドレス</label>
                 <input type="email" id="email" name="email" 
-                value="<?php if( !empty($email))echo $email; ?>">
+                value="<?php if (!empty($email)) echo $email; ?>">
                 <input type="submit" class="btn submit-btn" value="追加">
             </form>
             <a href="index.php" class="btn return-btn">戻る</a>
