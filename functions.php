@@ -90,3 +90,88 @@ function createErrMsg($errors)
 
     return $err_msg;
 }
+
+function findById($id)
+{
+    $dbh = connectDb();
+
+    $sql = <<<EOM
+    SELECT
+        *
+    FROM
+        customers
+    WHERE
+        id = :id;
+    EOM;
+
+    $stmt = $dbh->prepare($sql);
+
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    $stmt->execute();
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+function updateValidate($company, $name, $email, $customer)
+{
+    $errors = [];
+
+    if ($company == '') {
+        $errors[] =MSG_COMPANY_REQUIRED;
+    }
+    if ($name == '') {
+        $errors[] =MSG_NAME_REQUIRED;
+    }
+    if ($email == '') {
+        $errors[] =MSG_EMAIL_REQUIRED;
+    }
+    if ($company == $customer['company'] && $name == $customer['name'] && $email == $customer['email']) {
+        $errors[] = MSG_NO_CHANGE;
+    }
+
+    return $errors;
+}
+
+function updateCustomer($id, $company, $name, $email)
+{
+    $dbh = connectDb();
+
+    $sql = <<<EOM
+    UPDATE
+        customers
+    SET
+        company = :company,
+        name = :name,
+        email = :email
+    WHERE
+        id = :id
+    EOM;
+
+    $stmt = $dbh->prepare($sql);
+
+    $stmt->bindParam(':company', $company, PDO::PARAM_STR);
+    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    $stmt->execute();
+}
+
+function deleteCustomer($id)
+{
+    $dbh = connectDb();
+
+    $sql = <<<EOM
+    DELETE FROM
+        customers
+    WHERE
+        id = :id
+    EOM;
+
+    $stmt = $dbh->prepare($sql);
+
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    $stmt->execute();
+}
