@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="email">メールアドレス</label>
                 <input type="email" id="email" name="email" 
                 value="<?= h($customer['email']) ?>">
-                <input type="submit" class="btn submit-btn" value="追加">
+                <input type="submit" class="btn submit-btn" value="更新">
             </form>
             <a href="index.php" class="btn return-btn">戻る</a>
         </div>

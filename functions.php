@@ -157,3 +157,21 @@ function updateCustomer($id, $company, $name, $email)
 
     $stmt->execute();
 }
+
+function deleteCustomer($id)
+{
+    $dbh = connectDb();
+
+    $sql = <<<EOM
+    DELETE FROM
+        customers
+    WHERE
+        id = :id
+    EOM;
+
+    $stmt = $dbh->prepare($sql);
+
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    $stmt->execute();
+}
